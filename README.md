@@ -25,6 +25,10 @@ For more complicated implementations check the links below:
 * [impyla](https://github.com/cloudera/impyla)
 * [PyHive](https://github.com/dropbox/PyHive)
 
+## Impyla
+
+See the [Impyla Usage](http://blog.cloudera.com/blog/2014/04/a-new-python-client-for-impala/) before implementation.
+
 ## Further reading
 
 * [HiveServer2 Security Configuration](http://www.cloudera.com/documentation/enterprise/5-2-x/topics/cdh_sg_hiveserver2_security.html)
