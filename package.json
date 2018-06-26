@@ -1,0 +1,32 @@
+{
+  "name": "nodehs",
+  "version": "0.0.0",
+  "description": "Node client for Impala using HiveServer2",
+  "main": "index.js",
+  "scripts": {
+    "gen": "thrift --gen js:node ./thrift/Types.thrift",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ufukomer/nodehs.git"
+  },
+  "keywords": [
+    "node",
+    "impala",
+    "hive",
+    "hiveserver2",
+    "kerberos",
+    "sasl",
+    "ldap"
+  ],
+  "author": "ufukomer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ufukomer/nodehs/issues"
+  },
+  "homepage": "https://github.com/ufukomer/nodehs#readme",
+  "dependencies": {
+    "thrift": "^0.11.0"
+  }
+}

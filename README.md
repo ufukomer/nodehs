@@ -1,5 +1,5 @@
 # Node Client for HiveServer2
-	
+
 HiveServer2 supports authentication of the Thrift client using either of these methods:
 
 * Kerberos authentication
