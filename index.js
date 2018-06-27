@@ -3,6 +3,30 @@ const service = require('./js/ImpalaHiveServer2Service');
 const types = require('./js/beeswax_types');
 const { TProtocolVersion, TOpenSessionReq, TExecuteStatementReq, TFetchResultsReq, TFetchOrientation } = require('./js/TCLIService_types');
 const ser = require('./js/TCLIService');
+const LDAP = require('ldap-client');
+
+
+
+var ldap = new LDAP({
+	uri: 'ldap://quickstart.cloudera:389',
+	connect: function() {
+		this.bind({
+			binddn: 'cn=Manager,dc=example,dc=com',
+			password: 'cloudera'
+		}, function(err) {
+			console.error('SASL Err:', err)
+		});
+	}
+});
+
+ldap.onconnect(() => { console.log('YARASA') })
+//
+// ldap.bind({
+// 	binddn: 'cn=Manager,dc=example,dc=com',
+// 	password: 'cloudera'
+// }, function(err) { if( err) console.log(err); });
+
+// console.log(ldap.tlsactive());
 
 const connection = thrift.createConnection('127.0.0.1', '21050', {
 	// transport: thrift.TBufferedTransport,
@@ -16,12 +40,12 @@ connection.on('connect', () => console.log('Connection was opened!'));
 
 const client = thrift.createClient(service, connection);
 
-console.log('TEST:', client.GetExecSummary)
-console.log('TEST:', TProtocolVersion)
-console.log('TEST:', new TOpenSessionReq())
-console.log('OpenSession:', client.OpenSession)
-console.log('ExecuteStatement:', client.ExecuteStatement)
-console.log('FetchResults:', client.FetchResults)
+// console.log('TEST:', client.GetExecSummary)
+// console.log('TEST:', TProtocolVersion)
+// console.log('TEST:', new TOpenSessionReq())
+// console.log('OpenSession:', client.OpenSession)
+// console.log('ExecuteStatement:', client.ExecuteStatement)
+// console.log('FetchResults:', client.FetchResults)
 
 const protocol = TProtocolVersion.HIVE_CLI_SERVICE_PROTOCOL_V6;
 const req = new TOpenSessionReq({
@@ -40,7 +64,7 @@ client.OpenSession(req)
 				const req = new TFetchResultsReq({
 					operationHandle: res.operationHandle,
 					orientation: TFetchOrientation.FETCH_NEXT,
-					maxRows: 9999999,
+					maxRows: 1024,
 				});
 				client.FetchResults(req)
 					.then((res) => console.log(res.results))
